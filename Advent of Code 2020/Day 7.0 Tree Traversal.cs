@@ -7,68 +7,74 @@ namespace Advent_of_Code_2020
 {
     class Day_7
     {
-        readonly static string strDesiredBag = "shiny gold bags";
+        static Dictionary<string, Dictionary<string, int>> masterDict = new Dictionary<string, Dictionary<string, int>>();
 
         public static int SolveNumberBagColorsContainAtLeastOneBag(List<string> listInputPuzzle)
         {
             int returnNumBags = 0;
 
-            foreach(string rawLine in listInputPuzzle)
+            // Load Master definition of all Bag Types as 'masterDict' into memory.
+            foreach (string rawLine in listInputPuzzle)
             {
-                Bag currBag = ConstructBagFromInput(rawLine);
-                returnNumBags += CountNumberBagColorsContainAtLeastOneBag(currBag);
+                string keyDefn = rawLine.Split(" contain ")[0];
+                Dictionary<string, int> currentChildBags = ConstructDictOfChildBagsFromInput(rawLine);
+                masterDict.Add(keyDefn, currentChildBags);
             }
+            foreach (string masterBagName in masterDict.Keys)
+            {
+                //var minionDict = new Dictionary<string, Dictionary<string, int>>(masterDict);
+                returnNumBags += Helper_TraverseTree(masterDict[masterBagName], returnNumBags);     // [muted magenta bags,3][clear cyan bags,3]
+            }
+            masterDict.Clear();
 
             return returnNumBags;
         }
 
-        private static Bag ConstructBagFromInput(string rawLine)
+        private static Dictionary<string, int> ConstructDictOfChildBagsFromInput(string rawLine)
         {
-            string noPeriodRawLine = rawLine.Trim('.');                         // shiny lime bags contain 3 muted magenta bags, 3 clear cyan bags.
-            string[] splitRawLine = noPeriodRawLine.Split(" contain ");         // [shiny lime bags][3 muted magenta bags, 3 clear cyan bags]
-            string[] childRawLine = splitRawLine[1].Split(", ");                // [3 muted magenta bags][3 clear cyan bags]
-            int[] numChildBags = new int[childRawLine.Length];
-            string[] strChildBags = new string[childRawLine.Length];
+            Dictionary<string, int> currentChildBags = new Dictionary<string, int>();
+            string noPeriodRawLine = rawLine.Trim('.');                                             // shiny lime bags contain 3 muted magenta bags, 3 clear cyan bags.
+            string[] splitRawLine = noPeriodRawLine.Split(" contain ");                             // [shiny lime bags][3 muted magenta bags, 3 clear cyan bags]
+            string[] childRawLine = splitRawLine[1].Split(", ");                                    // [3 muted magenta bags][3 clear cyan bags]
 
             for (int i = 0; i < childRawLine.Length; i++)
             {
                 string strNumChildBag = Regex.Match(childRawLine[i], @"\d+").Value;
                 if (childRawLine[i] == "no other bags")
                     strNumChildBag = "0";
-                numChildBags[i] = Int32.Parse(strNumChildBag);
-                strChildBags[i] = childRawLine[i].Replace(strNumChildBag, String.Empty).Trim();
+                string strChildBag = childRawLine[i].Replace(strNumChildBag, String.Empty).Trim();
+                currentChildBags.Add(strChildBag, Int32.Parse(strNumChildBag));                     // [muted magenta bags,3][clear cyan bags,3]
             }
-            Bag currentBag = new Bag() { BagName = splitRawLine[0], NumberChildBags = numChildBags, StringChildBags = strChildBags };
-            return currentBag;
+            return currentChildBags;
         }
-
-        private static int CountNumberBagColorsContainAtLeastOneBag(Bag currBag)
+        
+        private static int Helper_TraverseTree(Dictionary<string, int> currBag, int returnNumBags)
         {
-            int numBags = 0;
-            if (currBag.BagName == strDesiredBag)
-                numBags++;
-            for (int i = 0; i < currBag.StringChildBags.Length; i++)
-            {
-                if (currBag.StringChildBags[i] == strDesiredBag)
-                    numBags++;
-            }
-            return numBags;
-        }
-    }
+            // RECURSIVE FUNCTION ::
+            // get called with parameter Dict<string, int>
+            // foreach childBagName in parameter Dict<string, int> { call Helper_TraverseTree(Dictionary<string, int) }
+            // check if Dict[current Instance] == "no other bags" --> return counter
+            // check if Dict[current Instance] == "shiny gold bags"" --> return counter++
 
-    public class Bag
-    {
-        public string BagName { get; set; }
-        public int[] NumberChildBags { get; set; }
-        public string[] StringChildBags { get; set; }
+            foreach (string childBagName in currBag.Keys)
+            {
+                if (childBagName == "no other bags")
+                {
+                    return returnNumBags;
+                }
+                else if (childBagName.Contains("shiny gold bag"))
+                {
+                    returnNumBags++;
+                }
+                else
+                {
+                    if (masterDict.ContainsKey(childBagName))
+                        returnNumBags = Helper_TraverseTree(masterDict[childBagName], returnNumBags);
+                    else
+                        returnNumBags = Helper_TraverseTree(masterDict[childBagName + "s"], returnNumBags);
+                }
+            }
+            return returnNumBags;
+        }
     }
 }
-
-/*
- * 1. Read each Line
- * 2. Each Line -> Split('_contains_') = Array
- * 3. Array[1] -> Split(',_') = Array_Child
- * 4. Each Array_Child -> Split('_') = [int][bag*]
- * 5. Pass above into constructor of Struct with one Parent and multiple Children
- * 6. Save constructed Nodal Object in some data structure
- */
