@@ -1,6 +1,5 @@
 # Advent-of-Code-2020
-  
-/*
+
 ADVENT OF CODE 2020 CONSOLE APPLICATION
 =======================================
 Everyday from December 1st - 25th, coding challenges are released at https://adventofcode.com/2020.
@@ -10,4 +9,3 @@ This console application issues calls to the solutions of the daily challenges (
 The solutions are written as C# files, C++ DLLs, and Python scripts.
 This application automates logins to the website using GitHub credentials, and web scrapes the puzzle input (HTML) using Selenium Webdriver.
 This application communicates with C++ DLLs using interop services and with Python scripts using IronPython hosting.
- */
