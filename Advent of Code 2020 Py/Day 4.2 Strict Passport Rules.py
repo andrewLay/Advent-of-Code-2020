@@ -1,15 +1,41 @@
-'''
-byr (Birth Year) - four digits; at least 1920 and at most 2002.
-iyr (Issue Year) - four digits; at least 2010 and at most 2020.
-eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
-hgt (Height) - a number followed by either cm or in:
-If cm, the number must be at least 150 and at most 193.
-If in, the number must be at least 59 and at most 76.
-hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
-ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
-pid (Passport ID) - a nine-digit number, including leading zeroes.
-cid (Country ID) - ignored, missing or not.
-'''
+# DAY 4.2 EXAMPLE
+# ===============
+# byr (Birth Year) - four digits; at least 1920 and at most 2002.
+# iyr (Issue Year) - four digits; at least 2010 and at most 2020.
+# eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
+# hgt (Height) - a number followed by either cm or in:
+#                If cm, the number must be at least 150 and at most 193.
+#                If in, the number must be at least 59 and at most 76.
+# hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
+# ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
+# pid (Passport ID) - a nine-digit number, including leading zeroes.
+# cid (Country ID) - ignored, missing or not.
+# 
+# [invalid]
+# eyr:1972 cid:100
+# hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
+# 
+# [invalid]
+# iyr:2019
+# hcl:#602927 eyr:1967 hgt:170cm
+# ecl:grn pid:012533040 byr:1946
+# 
+# [valid]
+# hcl:#888785
+# hgt:164cm byr:2001 iyr:2015 cid:88
+# pid:545766238 ecl:hzl
+# eyr:2022
+# 
+# [valid]
+# iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
+# iyr:2011 ecl:brn hgt:59in
+# 
+# DAY 4.2
+# =======
+# (Q): Count the number of valid passports - those that have all required fields and valid values. Treat cid as optional. In your batch file, how many passports are valid?
+# (A): Therefore, the improved system would report 2 valid passports.
+
+
 import re                                                       # Library used to split on multiple characters 
 
 # Defining Global Variables

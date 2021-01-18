@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ADVENT OF CODE 2020 CONSOLE APPLICATION
+=======================================
+Everyday from December 1st - 25th, coding challenges are released at https://adventofcode.com/2020.
+Each day's challenge is composed of two problems to be solved sequentially. 
+Day X.2 is slightly harder than Day X.1, but related. 
+This console application issues calls to the solutions of the daily challenges.
+The solutions are written as C# files, C++ DLLs, and Python scripts.
+This application automates logins to the website using GitHub credentials, and web scrapes the puzzle input (HTML) using Selenium Webdriver.
+This application communicates with C++ DLLs using interop services and with Python scripts using IronPython hosting.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -107,8 +119,10 @@ namespace Advent_of_Code_2020
                     case "7":
                         driver.Navigate().GoToUrl(url_Input_Day_7);
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
-                        intReturnValue = Day_7.SolveNumberBagColorsContainAtLeastOneBag(listInputPuzzle);
+                        intReturnValue = Day_7.SolveNumberBagColorsContainAtLeastOneShinyGoldBag(listInputPuzzle);
                         Console.WriteLine("Day 7.1 -- The Number of Bag Colours that eventually contain at least One Shiny Gold Bag is: " + intReturnValue);
+                        intReturnValue = Day_7.SolveNumberBagsRequiredInShinyGoldBag(listInputPuzzle);
+                        Console.WriteLine("Day 7.2 -- The Number of Bags Required inside One Single Shiny Gold Bag is: " + intReturnValue);
                         day = null;
                         break;
                     case "end":

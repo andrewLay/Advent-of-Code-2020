@@ -1,3 +1,14 @@
+# DAY 2.2 EXAMPLE
+# ===============
+# 1-3 a: abcde is valid: position 1 contains a and position 3 does not.
+# 1-3 b: cdefg is invalid: neither position 1 nor position 3 contains b.
+# 2-9 c: ccccccccc is invalid: both position 2 and position 9 contain c.
+#
+# DAY 2.2
+# =======
+# (Q): Each policy actually describes two positions in the password, where 1 means the first character, 2 means the second character. How many passwords are valid?
+# (A): Therefore, only 1 password is valid.
+
 # Defining Global Variables
 minPosition = 0
 maxPosition = 0

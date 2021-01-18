@@ -1,3 +1,14 @@
+# DAY 2.1 EXAMPLE
+# ===============
+# 1-3 a: abcde
+# 1-3 b: cdefg
+# 2-9 c: ccccccccc
+# 
+# DAY 2.1
+# =======
+# (Q): If (1-3 a) means that the password must contain (a) at least 1 time and at most 3 times, how many passwords are valid?
+# (A): Therefore, 2 passwords are valid.
+
 # Defining Global Variables
 minCount = 0
 maxCount = 0

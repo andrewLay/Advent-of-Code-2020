@@ -1,4 +1,40 @@
-﻿using System;
+﻿/*
+DAY 6.0 EXAMPLE
+===============
+abcx
+abcy
+abcz
+
+abc
+
+a
+b
+c
+
+ab
+ac
+
+a
+a
+a
+a
+
+b
+
+Each line is one person's answers (one letter = "yes" answer) to a questionnaire. Groups of person(s) separated by a blank line.
+ 
+DAY 6.1
+=======
+(Q): For each group, count the number of questions to which anyone answered "yes". What is the sum of those counts?
+(A): The sum of these counts is 6 + 3 + 3 + 3 + 1 + 1 = 17.
+
+DAY 6.2
+=======
+(Q): For each group, count the number of questions to which everyone answered "yes". What is the sum of those counts?
+(A): The sum of these counts is 3 + 3 + 0 + 1 + 1 + 1 = 9.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

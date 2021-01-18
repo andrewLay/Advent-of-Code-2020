@@ -1,4 +1,25 @@
-﻿using System;
+﻿/*
+DAY 1.0 EXAMPLE
+===============
+1721
+979
+366
+299
+675
+1456
+ 
+DAY 1.1
+=======
+(Q): Find the two entries that sum to 2020; what do you get if you multiply them together?
+(A): The two entries that sum to 2020 are 1721 and 299. Therefore, the correct answer is 514579.
+
+DAY 1.2
+=======
+(Q): What is the product of the three entries that sum to 2020?
+(A): The three entries that sum to 2020 are 979, 366, and 675. Multiplying them together produces the answer, 241861950.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
