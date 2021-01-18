@@ -37,14 +37,13 @@ namespace Advent_of_Code_2020
         {
             int returnNumBags = 0;
 
-            // Load Master definition of all Bag Types as 'masterDict' into memory.
-            foreach (string rawLine in listInputPuzzle)
+            foreach (string rawLine in listInputPuzzle)                                             // Load Master definition of all Bag Colours as 'masterDict' into memory
             {
                 string keyDefn = rawLine.Split(" contain ")[0];
                 Dictionary<string, int> currentChildBags = ConstructDictOfChildBagsFromInput(rawLine);
                 masterDict.Add(keyDefn, currentChildBags);
             }
-            foreach (string masterBagName in masterDict.Keys)
+            foreach (string masterBagName in masterDict.Keys)                                       // Check each masterDict definition (each line = Bag Colour), for potentially containing shiny gold bags
             {
                 bool containShinyBag = Helper_TraverseTree(masterDict[masterBagName], false);       // [muted magenta bags,3][clear cyan bags,3]
                 if (containShinyBag)
@@ -61,16 +60,11 @@ namespace Advent_of_Code_2020
         {
             int returnNumBags = 0;
 
-            // Load Master definition of all Bag Types as 'masterDict' into memory.
-            foreach (string rawLine in listInputPuzzle)
+            foreach (string rawLine in listInputPuzzle)                                             // Load Master definition of all Bag Colours as 'masterDict' into memory
             {
                 string keyDefn = rawLine.Split(" contain ")[0];
                 Dictionary<string, int> currentChildBags = ConstructDictOfChildBagsFromInput(rawLine);
                 masterDict.Add(keyDefn, currentChildBags);
-            }
-            foreach (string childBagName in masterDict["shiny gold bags"].Keys)
-            {
-                returnNumBags += masterDict["shiny gold bags"][childBagName];
             }
             returnNumBags += Helper_TraverseTree_ReturnINT(masterDict["shiny gold bags"], 0);
             masterDict.Clear();
@@ -81,7 +75,7 @@ namespace Advent_of_Code_2020
         private static Dictionary<string, int> ConstructDictOfChildBagsFromInput(string rawLine)
         {
             Dictionary<string, int> currentChildBags = new Dictionary<string, int>();
-            string noPeriodRawLine = rawLine.Trim('.');                                             // shiny lime bags contain 3 muted magenta bags, 3 clear cyan bags.
+            string noPeriodRawLine = rawLine.Trim('.');                                             // shiny lime bags contain 3 muted magenta bags, 3 clear cyan bags
             string[] splitRawLine = noPeriodRawLine.Split(" contain ");                             // [shiny lime bags][3 muted magenta bags, 3 clear cyan bags]
             string[] childRawLine = splitRawLine[1].Split(", ");                                    // [3 muted magenta bags][3 clear cyan bags]
 
@@ -131,6 +125,7 @@ namespace Advent_of_Code_2020
             // RECURSIVE FUNCTION ::
             // get called with parameter Dict<string, int>
             // foreach childBagName in parameter Dict<string, int> { call Helper_TraverseTree(Dictionary<string,int>, int) }
+            // count the current Instance's number of bags before iterating children
             // check if Dict[current Instance] == "no other bags" --> return count
             // check if Dict[current Instance] == "shiny gold bags"" --> return count++
             // otherwise, current Instance is not end-tip of branch, so instantiate its children
@@ -139,15 +134,12 @@ namespace Advent_of_Code_2020
             {
                 if (childBagName == "no other bags")
                 {
-                    return 1;
+                    return 0;
                 }
+                if (masterDict.ContainsKey(childBagName))
+                    returnNumBags += currBag[childBagName] + currBag[childBagName] * Helper_TraverseTree_ReturnINT(masterDict[childBagName], 0);
                 else
-                {
-                    if (masterDict.ContainsKey(childBagName))
-                        returnNumBags += currBag[childBagName] * Helper_TraverseTree_ReturnINT(masterDict[childBagName], 0);
-                    else
-                        returnNumBags += currBag[childBagName] * Helper_TraverseTree_ReturnINT(masterDict[childBagName + "s"], 0);
-                }
+                    returnNumBags += currBag[childBagName] + currBag[childBagName] * Helper_TraverseTree_ReturnINT(masterDict[childBagName + "s"], 0);
             }
             return returnNumBags;
         }
