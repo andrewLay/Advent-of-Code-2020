@@ -35,7 +35,6 @@
 # (Q): Count the number of valid passports - those that have all required fields and valid values. Treat cid as optional. In your batch file, how many passports are valid?
 # (A): Therefore, the improved system would report 2 valid passports.
 
-
 import re                                                       # Library used to split on multiple characters 
 
 # Defining Global Variables

@@ -12,6 +12,9 @@
     <OutputPath>.</OutputPath>
     <Name>Advent of Code 2020 Py</Name>
     <RootNamespace>Advent of Code 2020 Day 2</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <DebugStdLib>False</DebugStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +35,14 @@
     <Compile Include="Day 4.2 Strict Passport Rules.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Day 8.2 Instruction Line Jumping.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Day 8.1 Instruction Line Jumping.py">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

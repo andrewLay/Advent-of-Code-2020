@@ -28,6 +28,8 @@ namespace Advent_of_Code_2020
         const string dirPythonScript_Day_2_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 2.2 Password Philosophy.py";
         const string dirPythonScript_Day_4_1 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 4.1 Batch File for Passport Valid.py";
         const string dirPythonScript_Day_4_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 4.2 Strict Passport Rules.py";
+        const string dirPythonScript_Day_8_1 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 8.1 Instruction Line Jumping.py";
+        const string dirPythonScript_Day_8_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 8.2 Instruction Line Jumping.py";
         const string CppFunctionsDLL = @"..\..\..\..\x64\Debug\Advent of Code 2020 C++.dll";
         const string url_Input_Day_1 = "https://adventofcode.com/2020/day/1/input";
         const string url_Input_Day_2 = "https://adventofcode.com/2020/day/2/input";
@@ -36,6 +38,7 @@ namespace Advent_of_Code_2020
         const string url_Input_Day_5 = "https://adventofcode.com/2020/day/5/input";
         const string url_Input_Day_6 = "https://adventofcode.com/2020/day/6/input";
         const string url_Input_Day_7 = "https://adventofcode.com/2020/day/7/input";
+        const string url_Input_Day_8 = "https://adventofcode.com/2020/day/8/input";
 
         [DllImport(CppFunctionsDLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int FindHighestSeatID(string[] arrayInputPuzzle, int numArrayInput);
@@ -125,6 +128,15 @@ namespace Advent_of_Code_2020
                         Console.WriteLine("Day 7.2 -- The Number of Bags Required inside One Single Shiny Gold Bag is: " + intReturnValue);
                         day = null;
                         break;
+                    case "8":
+                        driver.Navigate().GoToUrl(url_Input_Day_8);
+                        listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
+                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_8_1, "glbAccValue");
+                        Console.WriteLine("Day 8.1 -- The value in the Accumulator variable is: " + scriptReturn);
+                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_8_2, "glbAccValue");
+                        Console.WriteLine("Day 8.2 -- The value in the Accumulator variable is: " + scriptReturn);
+                        day = null;
+                        break;
                     case "end":
                         isTerminate = true;
                         day = null;
@@ -174,6 +186,7 @@ namespace Advent_of_Code_2020
         {
             var pyEngine = Python.CreateEngine();
             var pyScope = pyEngine.CreateScope();
+            pyEngine.SetSearchPaths(new[] { "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\Lib" });
             pyScope.SetVariable("listInputPuzzle", listInputPuzzle);
             ScriptSource scriptSource = pyEngine.CreateScriptSourceFromFile(sourcePyScript);
             scriptSource.Execute(pyScope);
