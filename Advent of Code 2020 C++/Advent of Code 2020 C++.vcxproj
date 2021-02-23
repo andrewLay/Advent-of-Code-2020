@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Day_5.0_Boarding_Pass_Seat_ID.h" />
+    <ClInclude Include="Day_9.0_Encoding_Error.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Day_5.0_Boarding_Pass_Seat_ID.cpp" />
+    <ClCompile Include="Day_9.0_Encoding_Error.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

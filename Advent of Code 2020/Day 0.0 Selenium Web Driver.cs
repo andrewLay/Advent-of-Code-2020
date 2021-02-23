@@ -31,19 +31,17 @@ namespace Advent_of_Code_2020
         const string dirPythonScript_Day_8_1 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 8.1 Instruction Line Jumping.py";
         const string dirPythonScript_Day_8_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 8.2 Instruction Line Jumping.py";
         const string CppFunctionsDLL = @"..\..\..\..\x64\Debug\Advent of Code 2020 C++.dll";
-        const string url_Input_Day_1 = "https://adventofcode.com/2020/day/1/input";
-        const string url_Input_Day_2 = "https://adventofcode.com/2020/day/2/input";
-        const string url_Input_Day_3 = "https://adventofcode.com/2020/day/3/input";
-        const string url_Input_Day_4 = "https://adventofcode.com/2020/day/4/input";
-        const string url_Input_Day_5 = "https://adventofcode.com/2020/day/5/input";
-        const string url_Input_Day_6 = "https://adventofcode.com/2020/day/6/input";
-        const string url_Input_Day_7 = "https://adventofcode.com/2020/day/7/input";
-        const string url_Input_Day_8 = "https://adventofcode.com/2020/day/8/input";
+        const string url_Input_Day_X = "https://adventofcode.com/2020/day/X/input";
 
         [DllImport(CppFunctionsDLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int FindHighestSeatID(string[] arrayInputPuzzle, int numArrayInput);
         [DllImport(CppFunctionsDLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int FindMySeatID(string[] arrayInputPuzzle, int numArrayInput);
+
+        [DllImport(CppFunctionsDLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern double FindFirstNumbNotSumOfPrevNumbs(double[] arrayInputPuzzle, int numArrayInput, int preambleSize);
+        [DllImport(CppFunctionsDLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern double FindSumOfSmallestAndLargestNumbsInContiguousRange(double[] arrayInputPuzzle, int numArrayInput, double contiguousSumVal);
 
         static void Main(string[] args)
         {
@@ -53,6 +51,7 @@ namespace Advent_of_Code_2020
             bool isTerminate = false;
             string day = null;
             List<string> listInputPuzzle;
+            string[] arrayInputPuzzle;
             int intReturnValue = 0;
             var scriptReturn = -1;
             while (!isTerminate)
@@ -60,14 +59,14 @@ namespace Advent_of_Code_2020
                 switch (day)
                 {
                     case "1":
-                        driver.Navigate().GoToUrl(url_Input_Day_1);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         Day_1.SolvePuzzle2Numbs(listInputPuzzle);
                         Day_1.SolvePuzzle3Numbs(listInputPuzzle);
                         day = null;
                         break;
                     case "2":
-                        driver.Navigate().GoToUrl(url_Input_Day_2);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_2_1, "numValidPword");
                         Console.WriteLine("Day 2.1 -- The Number of Valid Passwords is: " + scriptReturn);
@@ -76,7 +75,7 @@ namespace Advent_of_Code_2020
                         day = null;
                         break;
                     case "3":
-                        driver.Navigate().GoToUrl(url_Input_Day_3);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         int xMov, yMov;
                         Console.Write("----> Enter the Number of X-movements to the Right: ");
@@ -93,7 +92,7 @@ namespace Advent_of_Code_2020
                         day = null;
                         break;
                     case "4":
-                        driver.Navigate().GoToUrl(url_Input_Day_4);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_4_1, "numValidPassport");
                         Console.WriteLine("Day 4.1 -- The Number of Valid Passports is: " + scriptReturn);
@@ -102,8 +101,8 @@ namespace Advent_of_Code_2020
                         day = null;
                         break;
                     case "5":
-                        driver.Navigate().GoToUrl(url_Input_Day_5);
-                        string[] arrayInputPuzzle = ReadInputPuzzle(driver);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
+                        arrayInputPuzzle = ReadInputPuzzle(driver);
                         intReturnValue = FindHighestSeatID(arrayInputPuzzle, arrayInputPuzzle.Length);
                         Console.WriteLine("Day 5.1 -- The Highest Seat ID of a Boarding Pass is: " + intReturnValue);
                         intReturnValue = FindMySeatID(arrayInputPuzzle, arrayInputPuzzle.Length);
@@ -111,7 +110,7 @@ namespace Advent_of_Code_2020
                         day = null;
                         break;
                     case "6":
-                        driver.Navigate().GoToUrl(url_Input_Day_6);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         intReturnValue = Day_6.SolveNumberDistinctAnswersByAnyone(listInputPuzzle);
                         Console.WriteLine("Day 6.1 -- The Sum of the Number of Distinct Questions Answered by Anyone is: " + intReturnValue);
@@ -120,7 +119,7 @@ namespace Advent_of_Code_2020
                         day = null;
                         break;
                     case "7":
-                        driver.Navigate().GoToUrl(url_Input_Day_7);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         intReturnValue = Day_7.SolveNumberBagColorsContainAtLeastOneShinyGoldBag(listInputPuzzle);
                         Console.WriteLine("Day 7.1 -- The Number of Bag Colours that eventually contain at least One Shiny Gold Bag is: " + intReturnValue);
@@ -129,12 +128,27 @@ namespace Advent_of_Code_2020
                         day = null;
                         break;
                     case "8":
-                        driver.Navigate().GoToUrl(url_Input_Day_8);
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_8_1, "glbAccValue");
                         Console.WriteLine("Day 8.1 -- The value in the Accumulator variable is: " + scriptReturn);
                         scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_8_2, "glbAccValue");
                         Console.WriteLine("Day 8.2 -- The value in the Accumulator variable is: " + scriptReturn);
+                        day = null;
+                        break;
+                    case "9":
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
+                        arrayInputPuzzle = ReadInputPuzzle(driver);
+                        int preambleSize;
+                        Console.Write("----> Enter the Size of the Preamble: ");
+                        bool isValidPreambleSize = Int32.TryParse(Console.ReadLine(), out preambleSize);
+                        if (isValidPreambleSize)
+                        {
+                            double dblReturnValue = FindFirstNumbNotSumOfPrevNumbs(Array.ConvertAll(arrayInputPuzzle, double.Parse), arrayInputPuzzle.Length, preambleSize);
+                            Console.WriteLine("Day 9.1 -- The First Number which is not the sum of two numbers in the preamble is: " + dblReturnValue);
+                            dblReturnValue = FindSumOfSmallestAndLargestNumbsInContiguousRange(Array.ConvertAll(arrayInputPuzzle, double.Parse), arrayInputPuzzle.Length, dblReturnValue);
+                            Console.WriteLine("Day 9.2 -- The sum of the Smallest and Largest numbers from the contiguous range is: " + dblReturnValue);
+                        }
                         day = null;
                         break;
                     case "end":

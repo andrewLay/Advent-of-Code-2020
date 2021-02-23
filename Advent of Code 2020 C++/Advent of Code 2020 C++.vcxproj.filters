@@ -24,6 +24,9 @@
     <ClInclude Include="Day_5.0_Boarding_Pass_Seat_ID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Day_9.0_Encoding_Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Day_5.0_Boarding_Pass_Seat_ID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Day_9.0_Encoding_Error.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
