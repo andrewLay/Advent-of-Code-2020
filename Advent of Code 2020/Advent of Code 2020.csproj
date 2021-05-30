@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="IronPython" Version="2.7.9" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="87.0.4280.8800" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="91.0.4472.1900" />
   </ItemGroup>
 
 
