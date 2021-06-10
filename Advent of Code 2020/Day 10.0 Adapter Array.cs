@@ -76,9 +76,9 @@ namespace Advent_of_Code_2020
             return returnProduct;
         }
 
-        public static int TotalNumberOfWaysConnectingOutletToCharger(List<string> listInputPuzzle)
+        public static long TotalNumberOfWaysConnectingOutletToCharger(List<string> listInputPuzzle)
         {
-            int returnProduct = -1;
+            long returnNumWays = 1;
 
             List<int> sortedAdapters = SortedAdapters(listInputPuzzle);
             List<int> firstDifferences = new List<int>();
@@ -95,15 +95,26 @@ namespace Advent_of_Code_2020
             // (0) - 1 - 4 - 5 - 6 - 7 - 10 - 11 - 12 - 15 - 16 - 19 - (22) : adapters
             //     1   3  [1   1   1]  3   [1    1]   3    1    3    3      : first differences
             //           >> 4 ways <<    >> 2 ways <<                       : 8 total ways
+            List<int> numCombosEachSegment = new List<int>();
+            List<int> segment = new List<int>();
             foreach (int diff in firstDifferences)
             {
-                if (diff < 3)       // Value of 1,2
+                if (diff < 3)               // Value of 1,2
                 {
-
+                    segment.Add(diff);
+                    continue;
+                }
+                else                        // Pass built-up segment on diff == 3
+                {
+                    if (segment.Count > 1)  // If Count = 1, then only One Combo; If Count = 0, then avoid CountNumberOfCombos()
+                        numCombosEachSegment.Add(CountNumberOfCombos(segment, 0));
+                    segment.Clear();
                 }
             }
+            foreach (int numCombos in numCombosEachSegment)
+                returnNumWays *= numCombos;
 
-            return returnProduct;
+            return returnNumWays;
         }
 
         private static List<int> SortedAdapters(List<string> listInputPuzzle)
@@ -128,6 +139,28 @@ namespace Advent_of_Code_2020
             sortedAdapters.Add(sortedAdapters[sortedAdapters.Count - 1] + 3);
 
             return sortedAdapters;
+        }
+
+        private static int CountNumberOfCombos(List<int> segment, int index)
+        {
+            int numOfCombos = 1;
+            for (int i = index; i < segment.Count; i++)
+            {
+                List<int> childSegment = new List<int>(segment);
+                if (childSegment[i] > 3)
+                    return 0;
+                int temp = -1;
+                if (i + 1 < childSegment.Count)
+                {
+                    temp = childSegment[i] + childSegment[i + 1];
+                    childSegment.RemoveAt(i + 1);
+                    childSegment.RemoveAt(i);
+                    childSegment.Insert(i, temp);
+                    numOfCombos += CountNumberOfCombos(childSegment, i);
+                }
+            }
+
+            return numOfCombos;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Advent_of_Code_2020
         static void Main(string[] args)
         {
             IWebDriver driver = new ChromeDriver(dirChromeDriver);
-            //AutomateGitHubCredentials(driver);
+            AutomateGitHubCredentials(driver);
 
             bool isTerminate = false;
             string day = null;
@@ -154,25 +154,10 @@ namespace Advent_of_Code_2020
                     case "10":
                         driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
-
-                        string temp = @"16
-10
-15
-5
-1
-11
-7
-19
-6
-12
-4";
-                        string[] temp2 = temp.Split(new[] { "\r\n", "\r", "\n", Environment.NewLine }, StringSplitOptions.None);
-                        listInputPuzzle = Enumerable.ToList(temp2);
-
                         intReturnValue = Day_10.ProductOfOneAndThreeJoltDifferences(listInputPuzzle);
                         Console.WriteLine("Day 10.1 -- The Product between the Number of 1-Jolt Differences and 3-Jolt Differences is: " + intReturnValue);
-                        intReturnValue = Day_10.TotalNumberOfWaysConnectingOutletToCharger(listInputPuzzle);
-                        Console.WriteLine("Day 10.2 -- The Total Number of Ways to Connect the Outlet to Device is: " + intReturnValue);
+                        long returnNumWays = Day_10.TotalNumberOfWaysConnectingOutletToCharger(listInputPuzzle);
+                        Console.WriteLine("Day 10.2 -- The Total Number of Ways to Connect the Outlet to Device is: " + returnNumWays);
                         day = null;
                         break;
                     case "end":
