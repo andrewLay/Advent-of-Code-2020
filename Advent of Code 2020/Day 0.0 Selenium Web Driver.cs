@@ -30,6 +30,9 @@ namespace Advent_of_Code_2020
         const string dirPythonScript_Day_4_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 4.2 Strict Passport Rules.py";
         const string dirPythonScript_Day_8_1 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 8.1 Instruction Line Jumping.py";
         const string dirPythonScript_Day_8_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 8.2 Instruction Line Jumping.py";
+        const string dirPythonScript_Day_11_1 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 11.1 Seating System.py";
+        const string dirPythonScript_Day_11_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 11.2 Seating System.py";
+
         const string CppFunctionsDLL = @"..\..\..\..\x64\Debug\Advent of Code 2020 C++.dll";
         const string url_Input_Day_X = "https://adventofcode.com/2020/day/X/input";
 
@@ -158,6 +161,15 @@ namespace Advent_of_Code_2020
                         Console.WriteLine("Day 10.1 -- The Product between the Number of 1-Jolt Differences and 3-Jolt Differences is: " + intReturnValue);
                         long returnNumWays = Day_10.TotalNumberOfWaysConnectingOutletToCharger(listInputPuzzle);
                         Console.WriteLine("Day 10.2 -- The Total Number of Ways to Connect the Outlet to Device is: " + returnNumWays);
+                        day = null;
+                        break;
+                    case "11":
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
+                        listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
+                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_11_1, "finalNumOccSeats");
+                        Console.WriteLine("Day 11.1 -- The Number of Seats that End Up Occupied is: " + scriptReturn);
+                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_11_2, "numValidPassport");
+                        Console.WriteLine("Day 4.2 -- The Number of Valid Passports is: " + scriptReturn);
                         day = null;
                         break;
                     case "end":

@@ -25,6 +25,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Day 11.1 Seating System.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Day 2.1 IronPython Script.py" />
     <Compile Include="Day 2.2 Password Philosophy.py">
       <SubType>Code</SubType>
