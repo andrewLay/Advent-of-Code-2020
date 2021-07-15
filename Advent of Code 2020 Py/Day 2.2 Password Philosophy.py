@@ -41,6 +41,9 @@ def determineValidPassword(password):
     if (lowerExist and not upperExist) or (upperExist and not lowerExist):
         numValidPword+=1
 
+
+# ~ MAIN ~
+# --------
 for rawLine in listInputPuzzle:
     splitEachLine(rawLine)
     determineValidPassword(password)

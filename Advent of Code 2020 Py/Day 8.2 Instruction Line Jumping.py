@@ -85,6 +85,9 @@ def executeGameCode(modifiedPuzzle):                            # Main function 
             return False                                        # Return TRUE only when listInputPuzzle's final instruc executes and program terminates
     return True
 
+
+# ~ MAIN ~
+# --------
 modifiedPuzzle = copy.deepcopy(listInputPuzzle)                 # Module copy.deepcopy() duplicates List structure with Values whereas copy.copy() is shallow
 for instrType in instrTypeDict.keys():
     for index, rawLine in enumerate(listInputPuzzle):           # Use enumerate() to have access to both the (string) and (index of string) in List[string]

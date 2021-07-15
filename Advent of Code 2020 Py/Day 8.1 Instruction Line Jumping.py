@@ -37,6 +37,9 @@ def extractInstructionParts():
     instrCmd = instrLine[0]
     instrParam = instrLine[1]
 
+
+# ~ MAIN ~
+# --------
 while (linePointer != len(listInputPuzzle)):
     extractInstructionParts()
     linePointerList.append(linePointer)

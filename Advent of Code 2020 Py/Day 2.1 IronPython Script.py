@@ -43,6 +43,9 @@ def determineValidPassword(password):
     if (counter >= minCount) and (counter <= maxCount):
         numValidPword+=1
 
+
+# ~ MAIN ~
+# --------
 for rawLine in listInputPuzzle:
     splitEachLine(rawLine)
     determineValidPassword(password)

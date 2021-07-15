@@ -168,8 +168,8 @@ namespace Advent_of_Code_2020
                         listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
                         scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_11_1, "finalNumOccSeats");
                         Console.WriteLine("Day 11.1 -- The Number of Seats that End Up Occupied is: " + scriptReturn);
-                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_11_2, "numValidPassport");
-                        Console.WriteLine("Day 4.2 -- The Number of Valid Passports is: " + scriptReturn);
+                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_11_2, "finalNumOccSeats");
+                        Console.WriteLine("Day 11.2 -- The Number of Seats that End Up Occupied is: " + scriptReturn);
                         day = null;
                         break;
                     case "end":

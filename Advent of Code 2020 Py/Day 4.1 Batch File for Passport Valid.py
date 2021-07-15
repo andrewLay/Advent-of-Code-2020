@@ -62,6 +62,9 @@ def determineValidPassport(passportEntity):
                 numValidPassport += 1
                 numValidFields = 0
 
+
+# ~ MAIN ~
+# --------
 for rawLine in listInputPuzzle:
     if (rawLine != ""):
         onePassport += (" " + rawLine)                          # Form a password entity from multi-lines
