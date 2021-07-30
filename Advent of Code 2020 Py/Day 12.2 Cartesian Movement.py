@@ -53,14 +53,13 @@ def rotateWayPoint(currDir, value, old_WayPtEastPos, old_WayPtNorthPos):
     global wayPtEastPos
     global wayPtNorthPos
     
-    if value == 90:
+    if value == 90 or value == 270:
         wayPtEastPos = old_WayPtNorthPos
         wayPtNorthPos = old_WayPtEastPos
         
-    # The (x,y) magnitudes do not change; only their signs for 180d,270d rotations found in dictDir
-    wayPtEastPos = wayPtEastPos * dictDir[currDir][0]
-    wayPtNorthPos = wayPtNorthPos * dictDir[currDir][1]
-    
+    # The (x,y) magnitudes do not change; only their signs for 180d rotations found in dictDir
+    wayPtEastPos = abs(wayPtEastPos) * dictDir[currDir][0]
+    wayPtNorthPos = abs(wayPtNorthPos) * dictDir[currDir][1]
 
 def moveWayPoint(command, value):
     global wayPtEastPos
@@ -74,6 +73,18 @@ def moveWayPoint(command, value):
         wayPtEastPos += value
     elif command == 'W':
         wayPtEastPos -= value
+
+def updateCurrDir(new_WayPtEastPos, new_WayPtNorthPos):
+    global currDir
+
+    if new_WayPtEastPos > 0 and new_WayPtNorthPos >= 0:
+        currDir = 0
+    elif new_WayPtEastPos <= 0 and new_WayPtNorthPos > 0:
+        currDir = 90
+    elif new_WayPtEastPos < 0 and new_WayPtNorthPos <= 0:
+        currDir = 180
+    elif new_WayPtEastPos >= 0 and new_WayPtNorthPos < 0:
+        currDir = 270
 
 
 # ~ MAIN ~
@@ -95,5 +106,6 @@ for instruction in instructions:
         shipNorthPos = shipNorthPos + (wayPtNorthPos * value)
     else:
         moveWayPoint(command, value)                            # Waypoint command: 'N', 'S', 'E', 'W'
+        updateCurrDir(wayPtEastPos, wayPtNorthPos)              # To account for waypoint drifting into new quadrant
 
 manhattanCoord = abs(shipEastPos) + abs(shipNorthPos)
