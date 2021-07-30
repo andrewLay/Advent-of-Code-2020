@@ -32,6 +32,8 @@ namespace Advent_of_Code_2020
         const string dirPythonScript_Day_8_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 8.2 Instruction Line Jumping.py";
         const string dirPythonScript_Day_11_1 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 11.1 Seating System.py";
         const string dirPythonScript_Day_11_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 11.2 Seating System.py";
+        const string dirPythonScript_Day_12_1 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 12.1 Cartesian Movement.py";
+        const string dirPythonScript_Day_12_2 = @"C:\Users\Andrew Lay\source\repos\Advent of Code 2020\Advent of Code 2020 Py\Day 12.2 Cartesian Movement.py";
 
         const string CppFunctionsDLL = @"..\..\..\..\x64\Debug\Advent of Code 2020 C++.dll";
         const string url_Input_Day_X = "https://adventofcode.com/2020/day/X/input";
@@ -170,6 +172,15 @@ namespace Advent_of_Code_2020
                         Console.WriteLine("Day 11.1 -- The Number of Seats that End Up Occupied is: " + scriptReturn);
                         scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_11_2, "finalNumOccSeats");
                         Console.WriteLine("Day 11.2 -- The Number of Seats that End Up Occupied is: " + scriptReturn);
+                        day = null;
+                        break;
+                    case "12":
+                        driver.Navigate().GoToUrl(url_Input_Day_X.Replace("X", day));
+                        listInputPuzzle = Enumerable.ToList(ReadInputPuzzle(driver));
+                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_12_1, "manhattanCoord");
+                        Console.WriteLine("Day 12.1 -- The Manhattan Coordinates at the ending location is: " + scriptReturn);
+                        scriptReturn = CreateIronPythonSession(listInputPuzzle, dirPythonScript_Day_12_2, "manhattanCoord");
+                        Console.WriteLine("Day 12.2 -- The Manhattan Coordinates at the ending location is: " + scriptReturn);
                         day = null;
                         break;
                     case "end":
